@@ -1,0 +1,640 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Cookora | Find & Book Your Perfect Meal</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    .gradient-bg {
+      background: linear-gradient(135deg, #f97316 0%, #fb923c 50%, #fdba74 100%);
+    }
+    .hero-gradient {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    }
+    .card-hover {
+      transition: all 0.3s ease;
+    }
+    .card-hover:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+    }
+    .floating {
+      animation: floating 3s ease-in-out infinite;
+    }
+    @keyframes floating {
+      0% { transform: translate(0, 0px); }
+      50% { transform: translate(0, -15px); }
+      100% { transform: translate(0, -0px); }
+    }
+    .notification-dot {
+      position: absolute;
+      top: -2px;
+      right: -2px;
+      width: 8px;
+      height: 8px;
+      background: #ef4444;
+      border-radius: 50%;
+    }
+    .cart-badge {
+      position: absolute;
+      top: -5px;
+      right: -5px;
+      background: #ef4444;
+      color: white;
+      border-radius: 50%;
+      width: 18px;
+      height: 18px;
+      font-size: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .glass-effect {
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+    .text-gradient {
+      background: linear-gradient(135deg, #f97316, #ec4899);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+  </style>
+</head>
+
+<body class="bg-white text-gray-900 dark:bg-gray-900 dark:text-gray-100 transition-colors duration-300">
+  <!-- Navigation Bar -->
+  <header class="fixed top-0 left-0 right-0 z-50 glass-effect border-b border-white/20">
+    <div class="container mx-auto px-6">
+      <div class="flex items-center justify-between py-4">
+        <!-- Logo -->
+        <div class="flex items-center gap-3">
+          <a href="index.html" class="flex items-center gap-3">
+            <div class="w-12 h-12 rounded-2xl gradient-bg flex items-center justify-center text-white font-bold shadow-2xl">
+              <i class="fas fa-utensils text-xl"></i>
+            </div>
+            <div>
+              <h1 class="text-2xl font-bold text-gradient">Cookora</h1>
+              <p class="text-xs text-gray-500 dark:text-gray-400">Taste the Difference</p>
+            </div>
+          </a>
+        </div>
+        
+        <!-- Navigation Menu -->
+        <nav class="hidden md:flex items-center gap-8">
+          <a href="index.html" class="text-lg font-semibold text-orange-500 dark:text-orange-400 transition-colors duration-300">Home</a>
+          <a href="food.html" class="text-lg font-semibold text-gray-700 dark:text-gray-300 hover:text-orange-500 dark:hover:text-orange-400 transition-colors duration-300">Food</a>
+          <a href="kitchen.html" class="text-lg font-semibold text-gray-700 dark:text-gray-300 hover:text-orange-500 dark:hover:text-orange-400 transition-colors duration-300">Kitchen</a>
+          <a href="about.html" class="text-lg font-semibold text-gray-700 dark:text-gray-300 hover:text-orange-500 dark:hover:text-orange-400 transition-colors duration-300">About</a>
+        </nav>
+
+        <!-- Right Side Actions -->
+        <div class="flex items-center gap-4">
+          <!-- Cart Button -->
+          <div class="relative">
+            <button id="cartBtn" class="p-3 rounded-2xl bg-white/80 dark:bg-gray-800/80 hover:bg-white dark:hover:bg-gray-700 shadow-lg hover:shadow-xl transition-all duration-300 relative">
+              <i class="fas fa-shopping-cart text-gray-700 dark:text-gray-300"></i>
+              <span class="cart-badge">3</span>
+            </button>
+          </div>
+          
+          <!-- Notification Button -->
+          <div class="relative">
+            <button id="notificationBtn" class="p-3 rounded-2xl bg-white/80 dark:bg-gray-800/80 hover:bg-white dark:hover:bg-gray-700 shadow-lg hover:shadow-xl transition-all duration-300 relative">
+              <i class="fas fa-bell text-gray-700 dark:text-gray-300"></i>
+              <span class="notification-dot"></span>
+            </button>
+          </div>
+          
+          <!-- Dark Mode Toggle -->
+          <button id="toggleDark" class="p-3 rounded-2xl bg-white/80 dark:bg-gray-800/80 hover:bg-white dark:hover:bg-gray-700 shadow-lg hover:shadow-xl transition-all duration-300">
+            <i class="fas fa-moon text-gray-700 dark:text-gray-300"></i>
+          </button>
+          
+          <!-- Profile -->
+          <div class="relative">
+            <button id="profileBtn" class="flex items-center gap-3 p-2 rounded-2xl bg-white/80 dark:bg-gray-800/80 hover:bg-white dark:hover:bg-gray-700 shadow-lg hover:shadow-xl transition-all duration-300">
+              <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=40&h=40&fit=crop&crop=face&q=80" alt="Profile" class="w-10 h-10 rounded-xl border-2 border-orange-500">
+              <span class="hidden md:block text-sm font-semibold text-gray-700 dark:text-gray-300">John Doe</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section id="home" class="min-h-screen hero-gradient relative overflow-hidden pt-20">
+    <!-- Animated Background Elements -->
+    <div class="absolute inset-0">
+      <div class="absolute top-1/4 left-1/4 w-72 h-72 bg-pink-500/20 rounded-full blur-3xl floating"></div>
+      <div class="absolute bottom-1/4 right-1/4 w-96 h-96 bg-purple-500/20 rounded-full blur-3xl floating" style="animation-delay: 2s;"></div>
+      <div class="absolute top-1/2 left-1/2 w-64 h-64 bg-orange-500/20 rounded-full blur-3xl floating" style="animation-delay: 4s;"></div>
+    </div>
+
+    <div class="container mx-auto px-6 py-20 relative z-10">
+      <div class="max-w-4xl mx-auto text-center">
+        <h1 class="text-6xl md:text-7xl font-bold text-white mb-6 leading-tight">
+          Discover Meals
+          <span class="text-transparent bg-clip-text bg-gradient-to-r from-orange-200 to-pink-200">You'll Love</span>
+        </h1>
+        <p class="text-xl md:text-2xl text-white/80 mb-8 leading-relaxed">
+          AI-powered food discovery that matches your cravings with perfect dishes from local kitchens
+        </p>
+        <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
+          <a href="food.html" class="px-8 py-4 gradient-bg text-white rounded-2xl font-bold text-lg shadow-2xl hover:shadow-3xl transition-all duration-300 transform hover:scale-105">
+            <i class="fas fa-utensils mr-3"></i>Explore Menu
+          </a>
+          <button class="px-8 py-4 glass-effect text-white rounded-2xl font-bold text-lg border border-white/30 hover:bg-white/10 transition-all duration-300">
+            <i class="fas fa-play-circle mr-3"></i>How It Works
+          </button>
+        </div>
+      </div>
+
+      <!-- Floating Food Cards -->
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-6 mt-20">
+        <div class="bg-white/10 backdrop-blur-lg rounded-3xl p-6 text-center card-hover border border-white/20">
+          <div class="w-16 h-16 gradient-bg rounded-2xl flex items-center justify-center text-white text-2xl mx-auto mb-4">
+            <i class="fas fa-utensils"></i>
+          </div>
+          <h3 class="text-white font-semibold mb-2">100+ Dishes</h3>
+          <p class="text-white/70 text-sm">Curated recipes</p>
+        </div>
+        <div class="bg-white/10 backdrop-blur-lg rounded-3xl p-6 text-center card-hover border border-white/20">
+          <div class="w-16 h-16 gradient-bg rounded-2xl flex items-center justify-center text-white text-2xl mx-auto mb-4">
+            <i class="fas fa-clock"></i>
+          </div>
+          <h3 class="text-white font-semibold mb-2">Fast Delivery</h3>
+          <p class="text-white/70 text-sm">30 min average</p>
+        </div>
+        <div class="bg-white/10 backdrop-blur-lg rounded-3xl p-6 text-center card-hover border border-white/20">
+          <div class="w-16 h-16 gradient-bg rounded-2xl flex items-center justify-center text-white text-2xl mx-auto mb-4">
+            <i class="fas fa-star"></i>
+          </div>
+          <h3 class="text-white font-semibold mb-2">4.9 Rating</h3>
+          <p class="text-white/70 text-sm">Customer reviews</p>
+        </div>
+        <div class="bg-white/10 backdrop-blur-lg rounded-3xl p-6 text-center card-hover border border-white/20">
+          <div class="w-16 h-16 gradient-bg rounded-2xl flex items-center justify-center text-white text-2xl mx-auto mb-4">
+            <i class="fas fa-heart"></i>
+          </div>
+          <h3 class="text-white font-semibold mb-2">Healthy</h3>
+          <p class="text-white/70 text-sm">Fresh ingredients</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Features Section -->
+  <section class="py-20 bg-gray-50 dark:bg-gray-800">
+    <div class="container mx-auto px-6">
+      <div class="text-center mb-16">
+        <h2 class="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-4">
+          How <span class="text-gradient">Cookora</span> Works
+        </h2>
+        <p class="text-xl text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
+          Experience the future of food discovery with our intelligent platform
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <!-- Feature 1 -->
+        <div class="bg-white dark:bg-gray-900 rounded-3xl p-8 card-hover shadow-2xl border border-gray-100 dark:border-gray-700">
+          <div class="w-20 h-20 gradient-bg rounded-2xl flex items-center justify-center text-white text-3xl mb-6">
+            <i class="fas fa-search"></i>
+          </div>
+          <h3 class="text-2xl font-bold text-gray-900 dark:text-white mb-4">Smart Discovery</h3>
+          <p class="text-gray-600 dark:text-gray-300 text-lg leading-relaxed">
+            Our AI learns your taste preferences and suggests perfect meals based on your cravings and dietary needs.
+          </p>
+          <div class="mt-6">
+            <span class="inline-flex items-center text-orange-500 font-semibold">
+              Learn more <i class="fas fa-arrow-right ml-2"></i>
+            </span>
+          </div>
+        </div>
+
+        <!-- Feature 2 -->
+        <div class="bg-white dark:bg-gray-900 rounded-3xl p-8 card-hover shadow-2xl border border-gray-100 dark:border-gray-700">
+          <div class="w-20 h-20 gradient-bg rounded-2xl flex items-center justify-center text-white text-3xl mb-6">
+            <i class="fas fa-utensils"></i>
+          </div>
+          <h3 class="text-2xl font-bold text-gray-900 dark:text-white mb-4">Personalized Menus</h3>
+          <p class="text-gray-600 dark:text-gray-300 text-lg leading-relaxed">
+            Get custom menu recommendations tailored to your kitchen setup, ingredients, and cooking preferences.
+          </p>
+          <div class="mt-6">
+            <span class="inline-flex items-center text-orange-500 font-semibold">
+              Explore menus <i class="fas fa-arrow-right ml-2"></i>
+            </span>
+          </div>
+        </div>
+
+        <!-- Feature 3 -->
+        <div class="bg-white dark:bg-gray-900 rounded-3xl p-8 card-hover shadow-2xl border border-gray-100 dark:border-gray-700">
+          <div class="w-20 h-20 gradient-bg rounded-2xl flex items-center justify-center text-white text-3xl mb-6">
+            <i class="fas fa-bolt"></i>
+          </div>
+          <h3 class="text-2xl font-bold text-gray-900 dark:text-white mb-4">Instant Booking</h3>
+          <p class="text-gray-600 dark:text-gray-300 text-lg leading-relaxed">
+            Book your favorite meals instantly with real-time availability from local kitchens and chefs.
+          </p>
+          <div class="mt-6">
+            <span class="inline-flex items-center text-orange-500 font-semibold">
+              Start booking <i class="fas fa-arrow-right ml-2"></i>
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Popular Dishes Section -->
+  <section class="py-20 bg-white dark:bg-gray-900">
+    <div class="container mx-auto px-6">
+      <div class="text-center mb-16">
+        <h2 class="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-4">
+          Popular <span class="text-gradient">Dishes</span>
+        </h2>
+        <p class="text-xl text-gray-600 dark:text-gray-300">Customer favorites you'll love</p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <!-- Dish 1 -->
+        <div class="bg-gradient-to-br from-orange-50 to-pink-50 dark:from-gray-800 dark:to-gray-700 rounded-3xl overflow-hidden card-hover shadow-2xl">
+          <div class="relative h-64">
+            <img src="https://images.unsplash.com/photo-1600891963935-27c7e1bcd7a5?w=600&q=80" alt="Miso Salmon Bowl" class="w-full h-full object-cover">
+            <div class="absolute top-4 right-4">
+              <span class="bg-orange-500 text-white px-3 py-1 rounded-full text-sm font-bold shadow-lg">$12.99</span>
+            </div>
+            <div class="absolute bottom-4 left-4">
+              <span class="bg-white/90 dark:bg-gray-800/90 text-gray-900 dark:text-white px-3 py-1 rounded-full text-sm font-semibold">
+                <i class="fas fa-star text-yellow-500 mr-1"></i> 4.8
+              </span>
+            </div>
+          </div>
+          <div class="p-6">
+            <h3 class="text-2xl font-bold text-gray-900 dark:text-white mb-2">Miso Salmon Bowl</h3>
+            <p class="text-gray-600 dark:text-gray-300 mb-4">Fresh salmon with miso glaze, served with rice and seasonal vegetables</p>
+            <div class="flex items-center justify-between">
+              <span class="text-sm text-gray-500 dark:text-gray-400"><i class="fas fa-clock mr-1"></i> 20-25 min</span>
+              <button class="px-6 py-2 gradient-bg text-white rounded-xl font-semibold hover:shadow-lg transition-all duration-300">
+                Order Now
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Dish 2 -->
+        <div class="bg-gradient-to-br from-green-50 to-blue-50 dark:from-gray-800 dark:to-gray-700 rounded-3xl overflow-hidden card-hover shadow-2xl">
+          <div class="relative h-64">
+            <img src="https://images.unsplash.com/photo-1512621776951-a57141f2eefd?w=600&q=80" alt="Vegan Buddha Bowl" class="w-full h-full object-cover">
+            <div class="absolute top-4 right-4">
+              <span class="bg-green-500 text-white px-3 py-1 rounded-full text-sm font-bold shadow-lg">$10.50</span>
+            </div>
+            <div class="absolute bottom-4 left-4">
+              <span class="bg-white/90 dark:bg-gray-800/90 text-gray-900 dark:text-white px-3 py-1 rounded-full text-sm font-semibold">
+                <i class="fas fa-star text-yellow-500 mr-1"></i> 4.6
+              </span>
+            </div>
+          </div>
+          <div class="p-6">
+            <h3 class="text-2xl font-bold text-gray-900 dark:text-white mb-2">Vegan Buddha Bowl</h3>
+            <p class="text-gray-600 dark:text-gray-300 mb-4">Quinoa, roasted vegetables, avocado, and tahini dressing</p>
+            <div class="flex items-center justify-between">
+              <span class="text-sm text-gray-500 dark:text-gray-400"><i class="fas fa-clock mr-1"></i> 15-20 min</span>
+              <button class="px-6 py-2 gradient-bg text-white rounded-xl font-semibold hover:shadow-lg transition-all duration-300">
+                Order Now
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Dish 3 -->
+        <div class="bg-gradient-to-br from-red-50 to-orange-50 dark:from-gray-800 dark:to-gray-700 rounded-3xl overflow-hidden card-hover shadow-2xl">
+          <div class="relative h-64">
+            <img src="https://images.unsplash.com/photo-1525755662778-989d0524087e?w=600&q=80" alt="Spaghetti Pomodoro" class="w-full h-full object-cover">
+            <div class="absolute top-4 right-4">
+              <span class="bg-red-500 text-white px-3 py-1 rounded-full text-sm font-bold shadow-lg">$9.50</span>
+            </div>
+            <div class="absolute bottom-4 left-4">
+              <span class="bg-white/90 dark:bg-gray-800/90 text-gray-900 dark:text-white px-3 py-1 rounded-full text-sm font-semibold">
+                <i class="fas fa-star text-yellow-500 mr-1"></i> 4.9
+              </span>
+            </div>
+          </div>
+          <div class="p-6">
+            <h3 class="text-2xl font-bold text-gray-900 dark:text-white mb-2">Spaghetti Pomodoro</h3>
+            <p class="text-gray-600 dark:text-gray-300 mb-4">Classic Italian pasta with fresh tomato sauce and basil</p>
+            <div class="flex items-center justify-between">
+              <span class="text-sm text-gray-500 dark:text-gray-400"><i class="fas fa-clock mr-1"></i> 25-30 min</span>
+              <button class="px-6 py-2 gradient-bg text-white rounded-xl font-semibold hover:shadow-lg transition-all duration-300">
+                Order Now
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="text-center mt-12">
+        <a href="food.html" class="inline-flex items-center px-8 py-4 gradient-bg text-white rounded-2xl font-bold text-lg shadow-2xl hover:shadow-3xl transition-all duration-300 transform hover:scale-105">
+          View All Dishes <i class="fas fa-arrow-right ml-3"></i>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Section -->
+  <section class="py-20 gradient-bg relative overflow-hidden">
+    <div class="absolute inset-0">
+      <div class="absolute top-0 left-0 w-64 h-64 bg-white/10 rounded-full blur-3xl"></div>
+      <div class="absolute bottom-0 right-0 w-96 h-96 bg-white/10 rounded-full blur-3xl"></div>
+    </div>
+    
+    <div class="container mx-auto px-6 text-center relative z-10">
+      <h2 class="text-4xl md:text-5xl font-bold text-white mb-6">
+        Ready to Discover Your Next Favorite Meal?
+      </h2>
+      <p class="text-xl text-white/80 mb-8 max-w-2xl mx-auto">
+        Join thousands of food lovers who trust Cookora for their daily meals
+      </p>
+      <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
+        <a href="food.html" class="px-8 py-4 bg-white text-orange-500 rounded-2xl font-bold text-lg shadow-2xl hover:shadow-3xl transition-all duration-300 transform hover:scale-105">
+          <i class="fas fa-rocket mr-3"></i>Get Started
+        </a>
+        <button class="px-8 py-4 border-2 border-white text-white rounded-2xl font-bold text-lg hover:bg-white/10 transition-all duration-300">
+          <i class="fas fa-play-circle mr-3"></i>Watch Demo
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="bg-gray-900 text-white py-16">
+    <div class="container mx-auto px-6">
+      <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+        <div>
+          <div class="flex items-center gap-3 mb-6">
+            <div class="w-12 h-12 rounded-2xl gradient-bg flex items-center justify-center text-white font-bold">
+              <i class="fas fa-utensils"></i>
+            </div>
+            <h3 class="text-2xl font-bold text-gradient">Cookora</h3>
+          </div>
+          <p class="text-gray-400 mb-4">
+            Discover amazing meals tailored to your taste with AI-powered food recommendations.
+          </p>
+          <div class="flex gap-4">
+            <a href="#" class="w-10 h-10 bg-gray-800 rounded-xl flex items-center justify-center hover:bg-orange-500 transition-colors duration-300">
+              <i class="fab fa-facebook-f"></i>
+            </a>
+            <a href="#" class="w-10 h-10 bg-gray-800 rounded-xl flex items-center justify-center hover:bg-orange-500 transition-colors duration-300">
+              <i class="fab fa-twitter"></i>
+            </a>
+            <a href="#" class="w-10 h-10 bg-gray-800 rounded-xl flex items-center justify-center hover:bg-orange-500 transition-colors duration-300">
+              <i class="fab fa-instagram"></i>
+            </a>
+          </div>
+        </div>
+
+        <div>
+          <h4 class="text-lg font-semibold mb-6">Quick Links</h4>
+          <ul class="space-y-3">
+            <li><a href="index.html" class="text-gray-400 hover:text-white transition-colors duration-300">Home</a></li>
+            <li><a href="food.html" class="text-gray-400 hover:text-white transition-colors duration-300">Food Menu</a></li>
+            <li><a href="kitchen.html" class="text-gray-400 hover:text-white transition-colors duration-300">Kitchen Setup</a></li>
+            <li><a href="about.html" class="text-gray-400 hover:text-white transition-colors duration-300">About Us</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 class="text-lg font-semibold mb-6">Support</h4>
+          <ul class="space-y-3">
+            <li><a href="#" class="text-gray-400 hover:text-white transition-colors duration-300">Help Center</a></li>
+            <li><a href="#" class="text-gray-400 hover:text-white transition-colors duration-300">Contact Us</a></li>
+            <li><a href="#" class="text-gray-400 hover:text-white transition-colors duration-300">Privacy Policy</a></li>
+            <li><a href="#" class="text-gray-400 hover:text-white transition-colors duration-300">Terms of Service</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 class="text-lg font-semibold mb-6">Newsletter</h4>
+          <p class="text-gray-400 mb-4">Subscribe to get updates on new dishes and offers</p>
+          <div class="flex">
+            <input type="email" placeholder="Enter your email" class="flex-1 px-4 py-3 bg-gray-800 rounded-l-xl focus:outline-none focus:ring-2 focus:ring-orange-500">
+            <button class="px-6 gradient-bg text-white rounded-r-xl font-semibold hover:shadow-lg transition-all duration-300">
+              <i class="fas fa-paper-plane"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div class="border-t border-gray-800 mt-12 pt-8 text-center">
+        <p class="text-gray-400">&copy; 2025 Cookora. All rights reserved. Made with ❤️ for food lovers</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Cart Sidebar -->
+  <div id="cartSidebar" class="fixed top-0 right-0 h-full w-full md:w-96 bg-white dark:bg-gray-900 shadow-2xl z-50 transform translate-x-full transition-transform duration-500">
+    <div class="p-6 border-b border-gray-200 dark:border-gray-700 flex justify-between items-center">
+      <h3 class="text-2xl font-bold text-gray-900 dark:text-white">Your Cart</h3>
+      <button id="closeCart" class="p-3 rounded-2xl hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors duration-300">
+        <i class="fas fa-times text-xl text-gray-600 dark:text-gray-400"></i>
+      </button>
+    </div>
+    <div class="p-6 h-full overflow-y-auto">
+      <div id="cartItems" class="space-y-4">
+        <!-- Cart items will be populated here -->
+      </div>
+    </div>
+    <div class="p-6 border-t border-gray-200 dark:border-gray-700">
+      <div class="flex justify-between items-center mb-6">
+        <span class="text-xl font-bold text-gray-900 dark:text-white">Total:</span>
+        <span id="cartTotal" class="text-2xl font-bold text-orange-500">$0.00</span>
+      </div>
+      <button class="w-full py-4 gradient-bg text-white rounded-2xl font-bold text-lg shadow-2xl hover:shadow-3xl transition-all duration-300 transform hover:scale-105">
+        Proceed to Checkout
+      </button>
+    </div>
+  </div>
+  <div id="cartOverlay" class="fixed inset-0 bg-black bg-opacity-50 z-40 hidden"></div>
+
+  <!-- Notification Dropdown -->
+  <div id="notificationDropdown" class="hidden fixed top-20 right-6 w-80 bg-white dark:bg-gray-800 rounded-2xl shadow-2xl border border-gray-200 dark:border-gray-700 z-50">
+    <div class="p-6 border-b border-gray-200 dark:border-gray-700">
+      <h3 class="text-xl font-bold text-gray-900 dark:text-white">Notifications</h3>
+    </div>
+    <div class="max-h-96 overflow-y-auto">
+      <!-- Notifications will be populated here -->
+    </div>
+  </div>
+
+  <!-- Profile Dropdown -->
+  <div id="profileDropdown" class="hidden fixed top-20 right-6 w-64 bg-white dark:bg-gray-800 rounded-2xl shadow-2xl border border-gray-200 dark:border-gray-700 z-50">
+    <div class="p-6 border-b border-gray-200 dark:border-gray-700">
+      <div class="flex items-center gap-3">
+        <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=50&h=50&fit=crop&crop=face&q=80" alt="Profile" class="w-12 h-12 rounded-xl">
+        <div>
+          <p class="font-bold text-gray-900 dark:text-white">John Doe</p>
+          <p class="text-sm text-gray-500">john@example.com</p>
+        </div>
+      </div>
+    </div>
+    <div class="p-2">
+      <a href="profile.html" class="flex items-center gap-3 px-4 py-3 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-xl transition-colors duration-300">
+        <i class="fas fa-user"></i> My Profile
+      </a>
+      <a href="orders.html" class="flex items-center gap-3 px-4 py-3 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-xl transition-colors duration-300">
+        <i class="fas fa-shopping-bag"></i> My Orders
+      </a>
+      <a href="settings.html" class="flex items-center gap-3 px-4 py-3 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-xl transition-colors duration-300">
+        <i class="fas fa-cog"></i> Settings
+      </a>
+      <div class="border-t border-gray-200 dark:border-gray-700 mt-2 pt-2">
+        <button onclick="logout()" class="flex items-center gap-3 w-full px-4 py-3 text-red-500 hover:bg-red-50 dark:hover:bg-red-900/20 rounded-xl transition-colors duration-300">
+          <i class="fas fa-sign-out-alt"></i> Sign Out
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Dark Mode System
+    const toggleDark = document.getElementById('toggleDark');
+    
+    // Check for saved theme preference or prefer OS setting
+    const savedTheme = localStorage.getItem('cookora-theme') || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+    if (savedTheme === 'dark') {
+      document.documentElement.classList.add('dark');
+      toggleDark.querySelector('i').classList.replace('fa-moon', 'fa-sun');
+    }
+
+    toggleDark.addEventListener('click', () => {
+      document.documentElement.classList.toggle('dark');
+      const isDark = document.documentElement.classList.contains('dark');
+      localStorage.setItem('cookora-theme', isDark ? 'dark' : 'light');
+      
+      // Update icon
+      const icon = toggleDark.querySelector('i');
+      if (isDark) {
+        icon.classList.remove('fa-moon');
+        icon.classList.add('fa-sun');
+      } else {
+        icon.classList.remove('fa-sun');
+        icon.classList.add('fa-moon');
+      }
+    });
+
+    // Cart System
+    const cartBtn = document.getElementById('cartBtn');
+    const cartSidebar = document.getElementById('cartSidebar');
+    const closeCart = document.getElementById('closeCart');
+    const cartOverlay = document.getElementById('cartOverlay');
+
+    cartBtn.addEventListener('click', () => {
+      cartSidebar.classList.remove('translate-x-full');
+      cartOverlay.classList.remove('hidden');
+      document.body.style.overflow = 'hidden';
+    });
+
+    closeCart.addEventListener('click', () => {
+      cartSidebar.classList.add('translate-x-full');
+      cartOverlay.classList.add('hidden');
+      document.body.style.overflow = 'auto';
+    });
+
+    cartOverlay.addEventListener('click', () => {
+      cartSidebar.classList.add('translate-x-full');
+      cartOverlay.classList.add('hidden');
+      document.body.style.overflow = 'auto';
+    });
+
+    // Notification System
+    const notificationBtn = document.getElementById('notificationBtn');
+    const notificationDropdown = document.getElementById('notificationDropdown');
+
+    notificationBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      notificationDropdown.classList.toggle('hidden');
+      document.querySelector('.notification-dot').style.display = 'none';
+    });
+
+    // Profile System
+    const profileBtn = document.getElementById('profileBtn');
+    const profileDropdown = document.getElementById('profileDropdown');
+
+    profileBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      profileDropdown.classList.toggle('hidden');
+    });
+
+    // Close dropdowns when clicking outside
+    document.addEventListener('click', (e) => {
+      if (!notificationDropdown.contains(e.target) && e.target !== notificationBtn) {
+        notificationDropdown.classList.add('hidden');
+      }
+      if (!profileDropdown.contains(e.target) && e.target !== profileBtn) {
+        profileDropdown.classList.add('hidden');
+      }
+    });
+
+    // Logout function
+    function logout() {
+      if (confirm('Are you sure you want to logout?')) {
+        localStorage.removeItem('cookora-user');
+        window.location.href = 'auth.html';
+      }
+    }
+
+    // Make logout function globally available
+    window.logout = logout;
+
+    // Smooth scrolling for anchor links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+          target.scrollIntoView({
+            behavior: 'smooth',
+            block: 'start'
+          });
+        }
+      });
+    });
+
+    // Add some sample cart items
+    const cartItems = [
+      { name: 'Miso Salmon Bowl', price: 12.99, quantity: 1, image: 'https://images.unsplash.com/photo-1600891963935-27c7e1bcd7a5?w=100&q=80' },
+      { name: 'Vegan Buddha Bowl', price: 10.50, quantity: 2, image: 'https://images.unsplash.com/photo-1512621776951-a57141f2eefd?w=100&q=80' }
+    ];
+
+    const cartItemsContainer = document.getElementById('cartItems');
+    const cartTotal = document.getElementById('cartTotal');
+    
+    let total = 0;
+    cartItems.forEach(item => {
+      const itemTotal = item.price * item.quantity;
+      total += itemTotal;
+      
+      const itemElement = document.createElement('div');
+      itemElement.className = 'flex items-center gap-4 p-4 bg-gray-50 dark:bg-gray-800 rounded-2xl';
+      itemElement.innerHTML = `
+        <img src="${item.image}" alt="${item.name}" class="w-16 h-16 rounded-xl object-cover">
+        <div class="flex-1">
+          <h4 class="font-semibold text-gray-900 dark:text-white">${item.name}</h4>
+          <p class="text-orange-500 font-bold">$${item.price.toFixed(2)} × ${item.quantity}</p>
+        </div>
+        <div class="text-right">
+          <p class="font-bold text-gray-900 dark:text-white">$${itemTotal.toFixed(2)}</p>
+        </div>
+      `;
+      cartItemsContainer.appendChild(itemElement);
+    });
+    
+    cartTotal.textContent = `$${total.toFixed(2)}`;
+  </script>
+</body>
+</html>
